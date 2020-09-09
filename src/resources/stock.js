@@ -19,4 +19,16 @@ export const stock = {
     };
     return formattedData;
   },
+  getYesterdaysClose: async (ticker, date) => {
+    const url = stock.yesterdaysCloseUrl(ticker, date);
+    const query = await axios.get(url);
+    return stock.formatPriceData(query);
+  },
+  yesterdaysCloseUrl: (ticker, date) => {
+    return `${iex.base_url}/stock/${ticker}/intraday-prices?chartLast=1&exactDate=20200909&token=${iex.api_token}`;
+  },
+  finalData: async (ticker, latest, previous, date) => {
+    let data1 = await latest(ticker);
+    let data2 = await previous(ticker, date);
+  },
 };
