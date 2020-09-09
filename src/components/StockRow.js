@@ -12,10 +12,19 @@ const StockRow = (props) => {
     setFinData(data);
   };
 
-  useEffect(async () => {
-    const url = `${iex.base_url}/stock/${props.ticker}/intraday-prices?chartLast=1&token=${iex.api_token}`;
-    let data = await stock.latestPrice(props.ticker);
-    applyData(data);
+  useEffect(() => {
+    async function fetchData() {
+      const url = `${iex.base_url}/stock/${props.ticker}/intraday-prices?chartLast=1&token=${iex.api_token}`;
+      let date = 20200904;
+      let data = await stock.finalData(
+        props.ticker,
+        stock.latestPrice,
+        stock.getYesterdaysClose,
+        date
+      );
+      applyData(data);
+    }
+    fetchData();
   }, []);
 
   return (

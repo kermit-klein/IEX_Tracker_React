@@ -25,10 +25,21 @@ export const stock = {
     return stock.formatPriceData(query);
   },
   yesterdaysCloseUrl: (ticker, date) => {
-    return `${iex.base_url}/stock/${ticker}/intraday-prices?chartLast=1&exactDate=20200909&token=${iex.api_token}`;
+    return `${iex.base_url}/stock/${ticker}/intraday-prices?chartLast=1&exactDate=${date}&token=${iex.api_token}`;
   },
   finalData: async (ticker, latest, previous, date) => {
     let data1 = await latest(ticker);
     let data2 = await previous(ticker, date);
+    debugger;
+    let lastData = {
+      price: data1.price,
+      date: data1.date,
+      time: data1.label,
+      dollar_change: data1.price - data2.price,
+      percent_change: () => {
+        return (lastData.dollar_change / data2.close) * 100;
+      },
+    };
+    return lastData;
   },
 };
