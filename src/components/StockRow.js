@@ -25,9 +25,9 @@ const StockRow = (props) => {
   return (
     <tr>
       <td>{props.ticker}</td>
-      <td>{finData.price}</td>
+      <td>{finData.close}</td>
       <td>{finData.date}</td>
-      <td>{finData.time}</td>
+      <td>{finData.label}</td>
     </tr>
   );
 };
