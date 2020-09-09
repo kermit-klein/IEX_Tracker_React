@@ -14,21 +14,8 @@ const StockRow = (props) => {
 
   useEffect(async () => {
     const url = `${iex.base_url}/stock/${props.ticker}/intraday-prices?chartLast=1&token=${iex.api_token}`;
-    // fetch(url)
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     setFinData(data[data.length - 1]);
-    //   });
     let data = await stock.latestPrice(props.ticker);
     applyData(data);
-    // try {
-    //   let response = await axios.get(url);
-    //   setFinData(response.data[response.data.length - 1]);
-    // } catch (err) {
-    //   console.log(err);
-    // }
   }, []);
 
   return (

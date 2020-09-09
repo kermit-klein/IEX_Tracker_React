@@ -18,6 +18,9 @@ function App() {
               )}
             >
               <StockRow ticker="aapl" />
+              <StockRow ticker="goog" />
+              <StockRow ticker="msft" />
+              <StockRow ticker="tsla" />
             </ul>
           </div>
         </div>
