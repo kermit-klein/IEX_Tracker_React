@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import globalStyles from "./stylesheets/global-styles/bootstrap.module.css";
 import cx from "classnames";
 import StockRow from "./components/StockRow.js";
-import styles from "./stylesheets/App.module.css";
 
 function App() {
   return (
@@ -18,14 +17,7 @@ function App() {
                 globalStyles["list-group-flush"]
               )}
             >
-              <li
-                className={cx(globalStyles["list-group-item"], styles.change)}
-              >
-                AAPL
-              </li>
-              <li className={cx(globalStyles["list-group-item"])}>AAPL</li>
-              <li className={cx(globalStyles["list-group-item"])}>AAPL</li>
-              <li className={cx(globalStyles["list-group-item"])}>AAPL</li>
+              <StockRow ticker="aapl" />
             </ul>
           </div>
         </div>
