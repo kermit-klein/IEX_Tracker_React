@@ -30,14 +30,13 @@ export const stock = {
   finalData: async (ticker, latest, previous, date) => {
     let data1 = await latest(ticker);
     let data2 = await previous(ticker, date);
-    debugger;
     let lastData = {
       price: data1.price,
       date: data1.date,
       time: data1.label,
       dollar_change: data1.price - data2.price,
-      percent_change: () => {
-        return (lastData.dollar_change / data2.close) * 100;
+      percent_change: function () {
+        return (this.dollar_change / data2.price) * 100;
       },
     };
     return lastData;
