@@ -21,6 +21,7 @@ function App() {
               <StockRow ticker="goog" />
               <StockRow ticker="msft" />
               <StockRow ticker="tsla" />
+              <StockRow ticker="grub" />
             </ul>
           </div>
         </div>

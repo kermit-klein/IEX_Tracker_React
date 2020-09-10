@@ -15,7 +15,7 @@ const StockRow = (props) => {
   useEffect(() => {
     async function fetchData() {
       const url = `${iex.base_url}/stock/${props.ticker}/intraday-prices?chartLast=1&token=${iex.api_token}`;
-      let date = 20200904;
+      let date = 20200903;
       let data = await stock.finalData(
         props.ticker,
         stock.latestPrice,
@@ -29,7 +29,13 @@ const StockRow = (props) => {
   return (
     <li className={cx(globalStyles["list-group-item"])}>
       <b>{props.ticker}</b> $ {finData.price}
-      <span className={cx(styles.change)}>
+      <span
+        className={
+          finData.dollar_change > 0
+            ? cx(styles.green_change)
+            : cx(styles.red_change)
+        }
+      >
         {finData.dollar_change} (% {finData.percent_change})
       </span>
     </li>

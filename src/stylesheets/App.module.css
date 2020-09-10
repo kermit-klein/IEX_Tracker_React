@@ -1,5 +1,11 @@
-.change {
+.green_change {
   color: #4caf50;
+  font-size: 0.8rem;
+  margin-left: 5px;
+}
+
+.red_change {
+  color: red;
   font-size: 0.8rem;
   margin-left: 5px;
 }
