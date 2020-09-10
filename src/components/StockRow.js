@@ -30,8 +30,7 @@ const StockRow = (props) => {
     <li className={cx(globalStyles["list-group-item"])}>
       <b>{props.ticker}</b> $ {finData.price}
       <span className={cx(styles.change)}>
-        {finData.dollar_change} (%{" "}
-        {finData.percent_change ? finData.percent_change() : null})
+        {finData.dollar_change} (% {finData.percent_change})
       </span>
     </li>
   );

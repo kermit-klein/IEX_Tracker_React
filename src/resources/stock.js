@@ -33,11 +33,11 @@ export const stock = {
     let lastData = {
       price: data1.price,
       date: data1.date,
-      time: data1.label,
-      dollar_change: data1.price - data2.price,
-      percent_change: function () {
-        return (this.dollar_change / data2.price) * 100;
-      },
+      time: data1.time,
+      dollar_change: parseFloat((data1.price - data2.price).toFixed(4)),
+      percent_change: parseFloat(
+        (((data1.price - data2.price) / data2.price) * 100).toFixed(2)
+      ),
     };
     return lastData;
   },
