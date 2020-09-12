@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { stock } from "./resources/stock.js";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import globalStyles from "./stylesheets/global-styles/bootstrap.module.css";
 import cx from "classnames";
 import StockRow from "./components/StockRow.js";
 
 function App() {
-  const [lastTradingDate, setLastTradingDate] = useState(null);
-
-  useEffect(() => {
-    async function fetchDate() {
-      let date = new Date().toISOString().split("T")[0];
-      date = await stock.getLastBankDayDate(date);
-      setLastTradingDate(date);
-    }
-    fetchDate();
-  }, []);
-
   return (
     <div className="App">
       <div className={cx(globalStyles.container)}>
@@ -28,11 +16,11 @@ function App() {
                 globalStyles["list-group-flush"]
               )}
             >
-              <StockRow ticker="aapl" date={lastTradingDate} />
-              <StockRow ticker="goog" date={lastTradingDate} />
-              <StockRow ticker="msft" date={lastTradingDate} />
-              <StockRow ticker="tsla" date={lastTradingDate} />
-              <StockRow ticker="grub" date={lastTradingDate} />
+              <StockRow ticker="aapl" />
+              <StockRow ticker="goog" />
+              <StockRow ticker="msft" />
+              <StockRow ticker="tsla" />
+              <StockRow ticker="grub" />
             </ul>
           </div>
         </div>
