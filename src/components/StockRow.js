@@ -13,18 +13,15 @@ const StockRow = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      if (props.date != null) {
-        let data = await stock.finalData(
-          props.ticker,
-          stock.latestPrice,
-          stock.getYesterdaysClose,
-          props.date
-        );
-        applyData(data);
-      }
+      let data = await stock.finalData(
+        props.ticker,
+        stock.latestPrice,
+        stock.getYesterdaysClose
+      );
+      applyData(data);
     }
     fetchData();
-  }, [props.date]);
+  }, []);
   return (
     <li className={cx(globalStyles["list-group-item"])}>
       <b>{props.ticker}</b> $ {finData.price}

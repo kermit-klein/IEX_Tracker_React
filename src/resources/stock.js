@@ -11,25 +11,30 @@ export const stock = {
     return `${iex.base_url}/stock/${ticker}/intraday-prices?chartLast=1&token=${iex.api_token}`;
   },
   formatPriceData: (data) => {
-    let stockData = data.data[data.data.length - 1];
-    let formattedData = {
-      price: stockData.close,
-      date: stockData.date,
-      time: stockData.label,
-    };
+    if (Array.isArray(data.data)) {
+      let stockData = data.data[data.data.length - 1];
+      var formattedData = {
+        price: stockData.close,
+        date: stockData.date,
+        time: stockData.label,
+      };
+    } else {
+      let stockData = data.data;
+      var formattedData = {
+        price: stockData.close,
+        date: stockData.date,
+      };
+    }
     return formattedData;
   },
-  getYesterdaysClose: async (ticker, date) => {
-    const url = await stock.yesterdaysCloseUrl(ticker, date);
+  getYesterdaysClose: async (ticker) => {
+    const url = `${iex.base_url}/stock/${ticker}/previous?token=${iex.api_token}`;
     const query = await axios.get(url);
     return stock.formatPriceData(query);
   },
-  yesterdaysCloseUrl: async (ticker, date) => {
-    return `${iex.base_url}/stock/${ticker}/intraday-prices?chartLast=1&exactDate=${date}&token=${iex.api_token}`;
-  },
-  finalData: async (ticker, latest, previous, date) => {
+  finalData: async (ticker, latest, previous) => {
     let data1 = await latest(ticker);
-    let data2 = await previous(ticker, date);
+    let data2 = await previous(ticker);
     let lastData = {
       price: data1.price,
       date: data1.date,
@@ -40,11 +45,5 @@ export const stock = {
       ),
     };
     return lastData;
-  },
-  getLastBankDayDate: async (date) => {
-    let today = new Date(date).toISOString().split("T")[0].replace(/-/g, "");
-    const url = `${iex.base_url}/ref-data/us/dates/trade/last/1/${today}?token=${iex.api_token}`;
-    let lastBankDay = await axios.get(url);
-    return lastBankDay.data[0].date.replace(/-/g, "");
   },
 };
